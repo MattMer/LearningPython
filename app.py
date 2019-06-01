@@ -6,11 +6,11 @@ import time
 
 
 field_order = ['date', 'last_trade', 'change', 'ah_price', 'ah_change']
-fields = {'date' : 'Date',
-        'last_trade' : 'Last Trade',
-        'change' : 'Change',
-        'ah_price' : 'After Hours Price',
-        'ah_change' : 'After Hours Change'}
+fields = {'date': 'Date',
+        'last_trade': 'Last Trade',
+        'change': 'Change',
+        'ah_price': 'After Hours Price',
+        'ah_change': 'After Hours Change'}
 
 
 def find_quote_section(html):
@@ -63,10 +63,11 @@ def write_row(ticker_name, stock_values):
     csv_writer = csv.DictWriter(
         open(file_name, file_mode),
         fieldnames=field_order,
+        restval='',
         extrasaction='ignore')
         
     if file_mode == 'wb':
-        csv_writer.writerow(fields)
+        csv_writer.writeheader()
     csv_writer.writerow(stock_values)
     
 
