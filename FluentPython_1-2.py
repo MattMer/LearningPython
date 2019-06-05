@@ -22,3 +22,9 @@ class Vector:
         
     def __mul__(self, scalar):
         return Vector(self.x * scalar, self.y * scalar)
+
+v = Vector(3,4)
+ve = Vector(5,9)
+print(abs(v))
+print(v*3)
+print(v+ve)
