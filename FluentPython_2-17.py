@@ -1,20 +1,24 @@
-from collections import namedtuple
+import bisect
+import sys
 
-'''
-City = namedtuple('City', 'name country population coordinates')
-LatLong = namedtuple('LatLong', 'lat long')
+HAYSTACK=[1,4,5,6,8,12,15,20,21,23,23,26,29,30]
+NEEDLES=[0,1,2,5,8,10,22,23,29,30,31]
 
-tokyo = City('Tokyo', 'JP', 36.933, (35.689722, 139.691667))
-print(tokyo.population)
-print(City._fields)
+ROW_FMT='{0:2d} @ {1:2d}     {2}{0:<2d}'
 
-delhi_data = ('Delhi NCR', 'IN', 21.935, LatLong(28613889, 77.208889))
-delhi = City._make(delhi_data)
-print(delhi)
-print(delhi._asdict())
-for key, value in delhi._asdict().items():
-    print(key + ':', value)
-'''    
+def demo(bisect_fn):
+    for needle in reversed(NEEDLES):
+        position=bisect_fn(HAYSTACK, needle)
+        offset=position*'  |'
+        print(ROW_FMT.format(needle,position,offset))
+        
+if __name__ == '__main__':
     
-l = [10, 20, 30, 40, 50, 60]
-print(l[2:])
+    if sys.argv[-1] == 'left':
+        bisect_fn = bisect.bisect_left
+    else:
+        bisect_fn = bisect.bisect
+    
+    print('DEMO:', bisect.bisect_left)
+    print('haystack ->',' '.join('%2d' % n for n in HAYSTACK))
+    demo(bisect_fn)
